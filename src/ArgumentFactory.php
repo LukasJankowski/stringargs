@@ -240,20 +240,12 @@ class ArgumentFactory
         $val = filter_var($value, $filter, FILTER_NULL_ON_FAILURE);
 
         if ($val === null) {
-            $this->throws($value, $type);
+            throw new InvalidArgumentException(
+                sprintf('Unable to cast "%s" to "%s"', $value, $type)
+            );
         }
 
         return $val;
-    }
-
-    /**
-     * Throw on invalid parameter.
-     */
-    private function throws(string $value, string $type): void
-    {
-        throw new InvalidArgumentException(
-            sprintf('Unable to cast "%s" to "%s"', $value, $type)
-        );
     }
 
     /**

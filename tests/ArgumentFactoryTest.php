@@ -79,6 +79,20 @@ class ArgumentFactoryTest extends TestCase
         );
     }
 
+    public function test_it_throws_an_exception_when_providing_invalid_values()
+    {
+        $this->expectExceptionMessage('Unable to cast "not-a-bool" to "bool"');
+
+        ArgumentFactory::make('b:not-a-bool');
+    }
+
+    public function test_it_throws_an_exception_when_providing_an_invalid_type()
+    {
+        $this->expectExceptionMessage('Invalid argument type provided "r". Must be one of: s,i,f,b,n,a,o');
+
+        ArgumentFactory::make('r:some-value');
+    }
+
     public function test_it_throws_an_exception_if_a_type_requiring_a_value_doesnt_have_one()
     {
         $this->expectExceptionMessage('Type "integer" must have a value.');
@@ -108,19 +122,5 @@ class ArgumentFactoryTest extends TestCase
 
         $this->assertEquals('>>', ArgumentFactory::getTypeSeparator());
         $this->assertEquals(123, ArgumentFactory::make('i>>123'));
-    }
-
-    public function test_it_throws_an_exception_when_providing_invalid_values()
-    {
-        $this->expectExceptionMessage('Unable to cast "not-a-bool" to "bool"');
-
-        ArgumentFactory::make('b:not-a-bool');
-    }
-
-    public function test_it_throws_an_exception_when_providing_an_invalid_type()
-    {
-        $this->expectExceptionMessage('Invalid argument type provided "r". Must be one of: s,i,f,b,n,a,o');
-
-        ArgumentFactory::make('r:some-value');
     }
 }
