@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace LukasJankowski\StringArguments;
 
-use const FILTER_NULL_ON_FAILURE;
+use InvalidArgumentException;
 
+use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const FILTER_VALIDATE_FLOAT;
 use const FILTER_VALIDATE_INT;
-use InvalidArgumentException;
 
 class ArgumentFactory
 {
